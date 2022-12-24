@@ -1,11 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
-import { incNumber,decNumber } from './actions';
+import { incNumber,decNumber, input } from './actions';
 import { useDispatch,useSelector } from 'react-redux';
 
 function App() {
   const myState = useSelector((state)=>state.number);
-  console.log(myState)
+  const inputState = useSelector((state)=>state.inputval);
+  
   const dispatch = useDispatch();
 
   const handleIncrement = () =>{
@@ -16,11 +17,22 @@ function App() {
     dispatch(decNumber(10))
   }
 
+  const handleInput = (e) => {
+    dispatch(input(e.target.value))
+  }
+
+
   return (
     <div className="App">
-      hello world {myState}
+      Value {myState}
       <button onClick={handleIncrement}>+</button>
       <button onClick={handleDecrement}>-</button>
+      <br></br>
+
+      <input onChange={handleInput}/>
+      <br></br>
+      {inputState}
+      
     </div>
   );
 }
